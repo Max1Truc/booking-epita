@@ -33,8 +33,10 @@
             gradle
             jdk
             maven
+            mkcert
             ncurses
             osv-scanner
+            nssTools
             patchelf
             semgrep
             spring-boot-cli
