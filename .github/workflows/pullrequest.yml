@@ -21,7 +21,13 @@ jobs:
       - name: Run OSV Scanner before PR changes
         uses: google/osv-scanner-action/osv-scanner-action@8dded7155905cd666190a12dc9997000e58d163d # v2.0.2
         with:
-          scan-args: --recursive --format sarif --output osv-results-old.sarif ./app
+          scan-args: |
+            --recursive
+            --format
+            sarif
+            --output
+            osv-results-old.sarif
+            ./app
         continue-on-error: true
 
       - name: Checkout code
@@ -30,7 +36,13 @@ jobs:
       - name: Run OSV Scanner on PR changes
         uses: google/osv-scanner-action/osv-scanner-action@8dded7155905cd666190a12dc9997000e58d163d # v2.0.2
         with:
-          scan-args: --recursive --format sarif --output osv-results-new.sarif ./app
+          scan-args: |
+            --recursive
+            --format
+            sarif
+            --output
+            osv-results-new.sarif
+            ./app
         continue-on-error: true
 
       - name: Compare OSV Scanner analysis
