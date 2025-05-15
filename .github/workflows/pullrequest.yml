@@ -39,7 +39,7 @@ jobs:
           scan-args: --old osv-results-old.sarif --new osv-results-new.sarif --output osv-results-diff.sarif
 
       - name: Upload OSV Scanner differential report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: osv-differential-report
           path: osv-results-diff.sarif
@@ -58,7 +58,7 @@ jobs:
         run: semgrep scan --config=p/java --sarif -o semgrep-results.sarif --baseline-commit ${{ github.event.pull_request.base.sha }}
 
       - name: Upload Semgrep differential report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: semgrep-differential-report
           path: semgrep-results.sarif
