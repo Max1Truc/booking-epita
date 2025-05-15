@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  osv-scan:
+  osv-scan-diff:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -44,7 +44,7 @@ jobs:
           name: osv-differential-report
           path: osv-results-diff.sarif
 
-  semgrep-scan:
+  semgrep-scan-diff:
     runs-on: ubuntu-latest
     container:
       image: returntocorp/semgrep
