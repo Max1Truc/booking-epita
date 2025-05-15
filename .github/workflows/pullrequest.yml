@@ -21,25 +21,45 @@ jobs:
       - name: Run OSV Scanner before PR changes
         uses: google/osv-scanner-action/osv-scanner-action@8dded7155905cd666190a12dc9997000e58d163d # v2.0.2
         with:
-          scan-args: --recursive --format sarif --output osv-results-old.sarif ./app
+          scan-args: |
+            --recursive
+            --format
+            sarif
+            --output
+            osv-results-old.sarif
+            ./app
         continue-on-error: true
 
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          clean: false
 
       - name: Run OSV Scanner on PR changes
         uses: google/osv-scanner-action/osv-scanner-action@8dded7155905cd666190a12dc9997000e58d163d # v2.0.2
         with:
-          scan-args: --recursive --format sarif --output osv-results-new.sarif ./app
+          scan-args: |
+            --recursive
+            --format
+            sarif
+            --output
+            osv-results-new.sarif
+            ./app
         continue-on-error: true
 
       - name: Compare OSV Scanner analysis
         uses: google/osv-scanner-action/osv-reporter-action@8dded7155905cd666190a12dc9997000e58d163d # v2.0.2
         with:
-          scan-args: --old osv-results-old.sarif --new osv-results-new.sarif --output osv-results-diff.sarif
+          scan-args: |
+            --old
+            osv-results-old.sarif
+            --new
+            osv-results-new.sarif
+            --output
+            osv-results-diff.sarif
 
       - name: Upload OSV Scanner differential report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: osv-differential-report
           path: osv-results-diff.sarif
@@ -55,10 +75,10 @@ jobs:
           fetch-depth: 0 # Required for comparing changes
 
       - name: Run Semgrep analysis on PR changes
-        run: semgrep scan --config=p/java --sarif -o semgrep-results.sarif --baseline-commit ${{ github.event.pull_request.base.sha }}
+        run: semgrep scan --config=p/java --sarif -o semgrep-results.sarif --baseline-commit ${{ github.event.pull_request.base.sha }} --error
 
       - name: Upload Semgrep differential report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: semgrep-differential-report
           path: semgrep-results.sarif
