@@ -48,7 +48,13 @@ jobs:
       - name: Compare OSV Scanner analysis
         uses: google/osv-scanner-action/osv-reporter-action@8dded7155905cd666190a12dc9997000e58d163d # v2.0.2
         with:
-          scan-args: "--old osv-results-old.sarif --new osv-results-new.sarif --output osv-results-diff.sarif"
+          scan-args: |
+            --old
+            osv-results-old.sarif
+            --new
+            osv-results-new.sarif
+            --output
+            osv-results-diff.sarif
 
       - name: Upload OSV Scanner differential report
         uses: actions/upload-artifact@v4.6.2
