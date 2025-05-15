@@ -20,7 +20,7 @@ jobs:
       - name: Run OSV Scanner
         uses: google/osv-scanner-action/osv-scanner-action@8dded7155905cd666190a12dc9997000e58d163d # v2
         with:
-          scan-args: --recursive --format --output osv-results.sarif ./app
+          scan-args: --recursive --format sarif --output osv-results.sarif ./app
 
       - name: Upload OSV Scanner report
         uses: github/codeql-action/upload-sarif@v3
