@@ -32,7 +32,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.hamcrest:hamcrest:3.0'
-	implementation 'xerces:xercesImpl:2.12.1'
 }
 
 tasks.named('test') {
